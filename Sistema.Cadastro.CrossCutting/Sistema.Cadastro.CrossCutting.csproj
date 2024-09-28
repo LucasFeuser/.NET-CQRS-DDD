@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Common\Options\" />
+    <Folder Include="ExternalServices\ConsultaCep\" />
   </ItemGroup>
 
   <ItemGroup>
