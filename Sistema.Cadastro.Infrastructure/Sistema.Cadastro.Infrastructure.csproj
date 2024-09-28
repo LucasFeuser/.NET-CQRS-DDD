@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Sistema.Cadastro.CrossCutting\Sistema.Cadastro.CrossCutting.csproj" />
+    <ProjectReference Include="..\Sistema.Cadastro.Domain\Sistema.Cadastro.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

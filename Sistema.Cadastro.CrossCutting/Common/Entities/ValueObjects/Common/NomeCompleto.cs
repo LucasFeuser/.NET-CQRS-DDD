@@ -19,7 +19,7 @@ namespace Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common
             if (string.IsNullOrWhiteSpace(Nome))
                 throw new InvalidValueObjectException("O nome informado é inválido.");
 
-            if (Nome.Split(" ").Length < 2)
+            if (Nome.Split(" ").Length < 3)
                 throw new InvalidValueObjectException("O nome informado é inválido.");
 
             if (Nome.PossuiNumero())
