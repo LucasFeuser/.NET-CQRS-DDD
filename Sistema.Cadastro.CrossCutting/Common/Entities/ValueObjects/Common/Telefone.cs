@@ -18,7 +18,7 @@ namespace Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common
         {
             if (string.IsNullOrEmpty(NumTelefone)) return;
 
-            if (!TelefoneValidator.Validar(NumTelefone))
+            if (!TelefoneValidator.ValidarNumeroTelefone(NumTelefone))
                 throw new InvalidValueObjectException("Telefone informado é inválido.");
         }
     }

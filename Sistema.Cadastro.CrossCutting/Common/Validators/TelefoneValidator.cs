@@ -35,7 +35,7 @@
             "47", "48", "49" // SC
         };
 
-        public static bool Validar(string numero)
+        public static bool ValidarNumeroTelefone(string numero)
         {
             if (numero.Length < 11) return false;
 

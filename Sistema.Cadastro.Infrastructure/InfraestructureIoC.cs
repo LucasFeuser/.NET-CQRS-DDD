@@ -28,7 +28,6 @@ namespace Sistema.Cadastro.Infrastructure
             });
 
             services.AddScoped<IPacienteRepository, PacienteRepository>();
-
         }
     }
 }
