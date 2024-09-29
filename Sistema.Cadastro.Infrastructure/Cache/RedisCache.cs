@@ -34,7 +34,7 @@ namespace Sistema.Cadastro.Infrastructure.Cache
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[EXCEPTION][REDIS][GET] => Erro ao definir cache para chave {key}. Erro: {ex}", key);
+                _logger.LogError("[EXCEPTION][REDIS][SET] => Erro ao definir cache para chave {key}. Erro: {exception}", key, ex);
             }
         }
 
@@ -52,7 +52,7 @@ namespace Sistema.Cadastro.Infrastructure.Cache
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[EXCEPTION][REDIS][GET] => Erro ao definir cache com TTL para chave {key}. Erro: {ex}", key);
+                _logger.LogError("[EXCEPTION][REDIS][SET] => Erro ao definir cache com TTL para chave {key}. Erro: {exception}", key, ex);
             }
         }
 
@@ -66,7 +66,7 @@ namespace Sistema.Cadastro.Infrastructure.Cache
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[EXCEPTION][REDIS][GET] => Erro ao resgatar cache para chave {key}. Erro: {ex}", key);
+                _logger.LogError("[EXCEPTION][REDIS][GET] => Erro ao resgatar cache para chave {key}. Erro: {exception}", key, ex);
                 return null;
             }
         }
@@ -79,7 +79,7 @@ namespace Sistema.Cadastro.Infrastructure.Cache
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[EXCEPTION][REDIS][REMOVE] => Exception {ex}");
+                _logger.LogError("[EXCEPTION][REDIS][REMOVE] => Erro ao deletar registro para chave {key}. Erro: {exception}", key, ex);
             }
         }
     }
