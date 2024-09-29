@@ -13,17 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "III - Domain", "III - Domai
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IV - Infrastructure", "IV - Infrastructure", "{87991105-748F-4698-9F0F-454F1D3BDE7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema.Cadastro.API", "Sistema.Cadastro.API\Sistema.Cadastro.API.csproj", "{37980A95-56B6-41D2-A9D6-91A46A9013E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sistema.Cadastro.API", "Sistema.Cadastro.API\Sistema.Cadastro.API.csproj", "{37980A95-56B6-41D2-A9D6-91A46A9013E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema.Cadastro.Application", "Sistema.Cadastro.Application\Sistema.Cadastro.Application.csproj", "{BEC2E2A3-9527-4217-9813-F45510175768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sistema.Cadastro.Application", "Sistema.Cadastro.Application\Sistema.Cadastro.Application.csproj", "{BEC2E2A3-9527-4217-9813-F45510175768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema.Cadastro.Domain", "Sistema.Cadastro.Domain\Sistema.Cadastro.Domain.csproj", "{57F09C29-7D6F-4210-9A21-B6F72F4F5B4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sistema.Cadastro.Domain", "Sistema.Cadastro.Domain\Sistema.Cadastro.Domain.csproj", "{57F09C29-7D6F-4210-9A21-B6F72F4F5B4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema.Cadastro.Infrastructure", "Sistema.Cadastro.Infrastructure\Sistema.Cadastro.Infrastructure.csproj", "{0BF63D45-0F57-4F68-B860-5BF35A589A94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sistema.Cadastro.Infrastructure", "Sistema.Cadastro.Infrastructure\Sistema.Cadastro.Infrastructure.csproj", "{0BF63D45-0F57-4F68-B860-5BF35A589A94}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{CC940526-3311-4186-A2DA-558503A996EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema.Cadastro.CrossCutting", "Sistema.Cadastro.CrossCutting\Sistema.Cadastro.CrossCutting.csproj", "{86C9BC6F-C1B7-4798-8B2F-9F0A9A9880AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sistema.Cadastro.CrossCutting", "Sistema.Cadastro.CrossCutting\Sistema.Cadastro.CrossCutting.csproj", "{86C9BC6F-C1B7-4798-8B2F-9F0A9A9880AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalServices", "ExternalServices", "{4F44DDE3-D48D-4182-9D67-3945F595A57F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema.Cadastro.Infrastructure.ExternalServices", "Sistema.Cadastro.Infrastructure.ExternalServices\Sistema.Cadastro.Infrastructure.ExternalServices.csproj", "{E4D3D9E8-277D-41A0-8CE3-CB5AA36BDBC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{86C9BC6F-C1B7-4798-8B2F-9F0A9A9880AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86C9BC6F-C1B7-4798-8B2F-9F0A9A9880AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86C9BC6F-C1B7-4798-8B2F-9F0A9A9880AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4D3D9E8-277D-41A0-8CE3-CB5AA36BDBC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D3D9E8-277D-41A0-8CE3-CB5AA36BDBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D3D9E8-277D-41A0-8CE3-CB5AA36BDBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D3D9E8-277D-41A0-8CE3-CB5AA36BDBC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,8 @@ Global
 		{0BF63D45-0F57-4F68-B860-5BF35A589A94} = {87991105-748F-4698-9F0F-454F1D3BDE7D}
 		{CC940526-3311-4186-A2DA-558503A996EE} = {87991105-748F-4698-9F0F-454F1D3BDE7D}
 		{86C9BC6F-C1B7-4798-8B2F-9F0A9A9880AE} = {CC940526-3311-4186-A2DA-558503A996EE}
+		{4F44DDE3-D48D-4182-9D67-3945F595A57F} = {87991105-748F-4698-9F0F-454F1D3BDE7D}
+		{E4D3D9E8-277D-41A0-8CE3-CB5AA36BDBC5} = {4F44DDE3-D48D-4182-9D67-3945F595A57F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24A9AB2A-BFAC-42EC-AEAB-C7E138BDE328}

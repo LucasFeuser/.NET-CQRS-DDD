@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sistema.Cadastro.CrossCutting.Common.CQRS;
 using Sistema.Cadastro.CrossCutting.Common.Entities;
 using Sistema.Cadastro.CrossCutting.Common.Abstractions;
 
@@ -11,18 +12,25 @@ namespace Sistema.Cadastro.CrossCutting.Common.Extensions
             var domainEntities = @context
                 .ChangeTracker
                 .Entries<Entity>()
-                .Where(x => x.Entity.Eventos != null && x.Entity.Eventos.Any());
+                .Where(x => x.Entity.Eventos != null && x.Entity.Eventos.Any())
+                .ToList();
 
-            var domainEvents = domainEntities.SelectMany(x => x.Entity.Eventos).ToList();
+            var domainEvents = domainEntities
+                .SelectMany(x => x.Entity.Eventos)
+                .ToList();
 
-            domainEntities.ToList().ForEach(entity => entity.Entity.LimparEventos());
+            domainEntities.ForEach(entity => entity.Entity.LimparEventos());
 
-            var tasks = domainEvents.Select(async (@event) =>
+            var tasks = domainEvents.Select(@event =>
             {
-                await mediator.PublicarEventoAsync(@event);
+                return PublicarEvento(mediator, @event);
             });
 
             await Task.WhenAll(tasks);
         }
+
+        private static async Task PublicarEvento(IMediatorHandler mediator, Event @event) =>  
+            await mediator.PublicarEventoAsync(@event);         
+        
     }
 }
