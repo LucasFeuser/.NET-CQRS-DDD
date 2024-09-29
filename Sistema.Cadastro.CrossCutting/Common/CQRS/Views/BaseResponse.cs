@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using Sistema.Cadastro.CrossCutting.Messages;
+using System.Net;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Sistema.Cadastro.CrossCutting.Common.CQRS.Views
 {
@@ -22,6 +24,12 @@ namespace Sistema.Cadastro.CrossCutting.Common.CQRS.Views
             Mensagem = "Ocorreu um erro.";
             StatusCode = (int)code;
             Erros = errors;
+        }
+
+        public BaseResponse(HttpStatusCode code, List<string> errors)
+        {
+            Mensagem = "Ocorreu um erro.";
+            StatusCode = (int)code;
         }
 
         public BaseResponse(HttpStatusCode statusCode, string message, T data, List<ResponseErroView>? errors = null)
