@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sistema.Cadastro.Domain.Clientes.Paciente;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Sistema.Cadastro.Infrastructure.Data.Mappings
 {

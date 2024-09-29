@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sistema.Cadastro.CrossCutting\Sistema.Cadastro.CrossCutting.csproj" />
-    <ProjectReference Include="..\Sistema.Cadastro.Domain\Sistema.Cadastro.Domain.csproj" />
+    <ProjectReference Include="..\Sistema.Cadastro.Application\Sistema.Cadastro.Application.csproj" />
     <ProjectReference Include="..\Sistema.Cadastro.Infrastructure\Sistema.Cadastro.Infrastructure.csproj" />
   </ItemGroup>
 

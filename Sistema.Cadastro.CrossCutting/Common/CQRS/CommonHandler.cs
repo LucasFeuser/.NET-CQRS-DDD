@@ -29,8 +29,8 @@ namespace Sistema.Cadastro.CrossCutting.Common.CQRS
         #endregion
 
         #region 4xx
-        public IActionResult ReturnBadRequestComErros<T>(string codigo) where T : View
-            => new BadRequestObjectResult(new BaseResponse<T>(System.Net.HttpStatusCode.BadRequest, ValidationResult.Errors.Select(c => new ResponseErroView(codigo, c.ErrorMessage)).ToList()));
+        public IActionResult ReturnBadRequestComErros<T>(string codigo, string grupo) where T : View
+            => new BadRequestObjectResult(new BaseResponse<T>(System.Net.HttpStatusCode.BadRequest, ValidationResult.Errors.Select(c => new ResponseErroView(codigo, grupo, c.ErrorMessage)).ToList()));
 
         public IActionResult ReturnBadRequest(string message)
             => new BadRequestObjectResult(new BaseResponse<View>(System.Net.HttpStatusCode.BadRequest, message));

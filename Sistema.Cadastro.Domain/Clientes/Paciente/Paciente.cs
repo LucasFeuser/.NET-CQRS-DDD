@@ -1,9 +1,9 @@
 ﻿using Sistema.Cadastro.CrossCutting.Common.Entities;
-using Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common;
 using Sistema.Cadastro.Domain.Clientes.Paciente.DTOs;
 using Sistema.Cadastro.Domain.Clientes.Paciente.Enums;
 using Sistema.Cadastro.Domain.Clientes.Paciente.Events;
 using Sistema.Cadastro.Domain.Clientes.Paciente.Exception;
+using Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common;
 
 namespace Sistema.Cadastro.Domain.Clientes.Paciente
 {
@@ -63,24 +63,36 @@ namespace Sistema.Cadastro.Domain.Clientes.Paciente
             NomeCompleto = nomeCompleto;
             DataNascimento = dataNascimento;
             Sexo = dto.Sexo;
-            Telefone = dto.Telefone;
-            Email = dto.Email;
+            Telefone = new Telefone(dto.Telefone);
+            Email = new Email(dto.Email);
             PlanoSaude = dto.PlanoSaude;
             NumeroCarterinha = dto.NumeroCarterinha;
             ReceberNotificacoesWhats = dto.ReceberNotificacoesWhats;
 
-            Validar();
-            AdicionarEvento(new PacienteCadastradoEvent(NomeCompleto, dto));
+            ValidarPlanoSaude();
+            AdicionarEvento(new PacienteCadastradoEvent(Cpf, NomeCompleto, DataNascimento, dto));
         }
 
-        private bool Validar()
+        public Paciente AlterarDadosCliente(Cpf cpf, NomeCompleto nomeCompleto, DataNascimento dataNascimento, AlteracaoDadosPacienteDto dto)
+        {
+            NomeCompleto = nomeCompleto;
+            DataNascimento = dataNascimento;
+            Telefone = new Telefone(dto.Telefone);
+            Email = new Email(dto.Email);
+            PlanoSaude = dto.PlanoSaude;
+            NumeroCarterinha = dto.NumeroCarterinha;
+            ReceberNotificacoesWhats = dto.ReceberNotificacoesWhats;
+
+            ValidarPlanoSaude();
+            AdicionarEvento(new DadosPacienteAlteradoEvent(Cpf, NomeCompleto, DataNascimento, dto));
+
+            return this;
+        }
+
+        private void ValidarPlanoSaude()
         {
             if (!PlanoSaude.Equals(EPlanoSaude.SemPlano) && string.IsNullOrEmpty(NumeroCarterinha))
                 throw new ClienteComPlanoDeSaudeSemNumeroCarterinhaException();
-
-            return true;
         }
-
-
     }
 }

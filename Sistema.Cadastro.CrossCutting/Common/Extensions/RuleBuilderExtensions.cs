@@ -22,5 +22,12 @@ namespace Sistema.Cadastro.CrossCutting.Common.Extensions
                 .Must(DataValidator.ValidarDataNascimento)
                 .WithMessage("A data de nascimento deve ser válida e não pode estar no futuro ou além de 120 anos.");
         }
+
+        public static IRuleBuilderOptions<T, string> NumeroTelefoneValido<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .Must(TelefoneValidator.ValidarNumeroTelefone)
+                .WithMessage("O telefone informado não é valido");
+        }
     }
 }

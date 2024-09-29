@@ -5,9 +5,9 @@ using Sistema.Cadastro.CrossCutting.Common.CQRS;
 
 namespace Sistema.Cadastro.Domain.Clientes.Paciente.Events
 {
-    public class PacienteCadastradoEvent : Event
+    public class DadosPacienteAlteradoEvent : Event
     {
-        protected PacienteCadastradoEvent()
+        protected DadosPacienteAlteradoEvent()
         { }
 
         public Cpf Cpf { get; private set; }
@@ -28,7 +28,7 @@ namespace Sistema.Cadastro.Domain.Clientes.Paciente.Events
 
         public bool ReceberNotificacoesWhats { get; private set; } = false;
 
-        public PacienteCadastradoEvent(Cpf cpf, NomeCompleto nomeCompleto, DataNascimento dataNascimento, PacienteDto dto)
+        public DadosPacienteAlteradoEvent(Cpf cpf, NomeCompleto nomeCompleto, DataNascimento dataNascimento, AlteracaoDadosPacienteDto dto)
         {
             Cpf = cpf;
             NomeCompleto = nomeCompleto;
