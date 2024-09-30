@@ -1,19 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sistema.Cadastro.Domain.Clientes.Paciente;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Sistema.Cadastro.Domain.Clientes.Paciente.Enums;
 
 namespace Sistema.Cadastro.Infrastructure.Data.Mappings
 {
-    internal class PacienteMap : IEntityTypeConfiguration<Paciente>
+    internal class PacienteMap : IEntityTypeConfiguration<Pacientes>
     {
-        public void Configure(EntityTypeBuilder<Paciente> builder)
+        public void Configure(EntityTypeBuilder<Pacientes> builder)
         {
-            builder.ToTable(nameof(Paciente));
+            builder.ToTable("pacientes");
 
             builder.HasKey(s => s.Id);
             builder.Property(s => s.Id)
-                   .HasColumnName("id_paciente")
-                   .IsRequired();
+                 .HasColumnName("id_paciente")
+                 .ValueGeneratedOnAdd();
 
             builder.Property(s => s.Cpf)
                 .HasColumnName("num_cpf")
@@ -25,7 +26,8 @@ namespace Sistema.Cadastro.Infrastructure.Data.Mappings
 
             builder.Property(s => s.DataNascimento)
                 .HasColumnName("data_nascimento")
-                .IsRequired();
+                .IsRequired()
+                .HasConversion(c => c.ToUniversalTime(), c => DateTime.SpecifyKind(c, DateTimeKind.Utc));
 
             builder.Property(s => s.Email)
                 .HasColumnName("email")
@@ -33,15 +35,15 @@ namespace Sistema.Cadastro.Infrastructure.Data.Mappings
 
             builder.Property(s => s.Sexo)
                 .HasColumnName("genero")
-                .HasColumnType("char");
+                .HasConversion(c => (char)c, c => (ESexo)c)
+                .HasColumnType("char(1)");
 
             builder.Property(s => s.Telefone)
                 .HasColumnName("num_telefone")
                 .HasColumnType("varchar(11)");
 
             builder.Property(s => s.PlanoSaude)
-                .HasColumnName("plano_saude")
-                .HasColumnType("char");
+                .HasColumnName("plano_saude");
 
             builder.Property(s => s.NumeroCarterinha)
                 .HasColumnName("num_carteirinha");
@@ -50,14 +52,16 @@ namespace Sistema.Cadastro.Infrastructure.Data.Mappings
                 .HasColumnName("notificacao_wpp")
                 .HasColumnType("boolean");
 
-            //AGGREGATE
-            builder.Property(s => s.DataCadastro)
-                   .HasColumnName("dta_cadastro")
-                   .HasColumnType("timestamp");
+            builder.Property(s => s.EnderecoId)
+                .IsRequired()
+                .HasColumnName("endereco_id");
 
-            builder.Property(s => s.DataUltimaAtualizacao)
-                   .HasColumnName("dta_modificacao")
-                   .HasColumnType("timestamp");
+            builder.HasOne(p => p.Endereco)
+               .WithOne(e => e.Paciente)
+               .HasForeignKey<Pacientes>(p => p.EnderecoId);
+
+            builder.Ignore(x => x.DataUltimaAtualizacao);
+            builder.Ignore(x => x.DataCadastro);
         }
     }
 }

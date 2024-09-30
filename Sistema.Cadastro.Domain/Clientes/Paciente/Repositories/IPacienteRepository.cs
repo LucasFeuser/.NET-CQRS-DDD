@@ -4,10 +4,10 @@ using Sistema.Cadastro.Domain.Clientes.Paciente.DTOs;
 
 namespace Sistema.Cadastro.Domain.Clientes.Paciente.Repositories
 {
-    public interface IPacienteRepository : IBaseRepository<Paciente>
+    public interface IPacienteRepository : IBaseRepository<Pacientes>
     {
-        Task<bool> VerificarExistsPaciente(Cpf cpf);
-        Task<PacienteDto> ObterPacientePorCpf(Cpf cpf);
+        Task<bool> VerificarExistsPaciente(string cpf);
+        Task<PacienteDto> ObterPacientePorCpf(string cpf);
         Task<List<PacienteDto>> ObterPacientes();
     }
 }

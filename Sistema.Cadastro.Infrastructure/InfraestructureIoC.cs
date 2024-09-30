@@ -4,8 +4,10 @@ using Sistema.Cadastro.Infrastructure.Data;
 using Sistema.Cadastro.Infrastructure.Cache;
 using Microsoft.Extensions.DependencyInjection;
 using Sistema.Cadastro.Infrastructure.Mediator;
+using Sistema.Cadastro.Infrastructure.ExternalServices;
 using Sistema.Cadastro.CrossCutting.Common.Abstractions;
 using Sistema.Cadastro.Infrastructure.Data.Repositories;
+using Sistema.Cadastro.Domain.Clientes.Endereco.Interfaces;
 using Sistema.Cadastro.Domain.Clientes.Paciente.Repositories;
 
 namespace Sistema.Cadastro.Infrastructure
@@ -28,6 +30,9 @@ namespace Sistema.Cadastro.Infrastructure
             });
 
             services.AddScoped<IPacienteRepository, PacienteRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+
+            services.ResolveExternalServices();
         }
     }
 }

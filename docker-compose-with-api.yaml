@@ -1,0 +1,50 @@
+
+services:
+
+  redis:
+    image: redis
+    container_name: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1024m
+        reservations:
+          cpus: '0.25'
+          memory: 512m
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    volumes:
+      - ./scripts/creates.sql:/docker-entrypoint-initdb.d/creates.sql
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: "D3velop$"
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  api:
+    image: ${DOCKER_REGISTRY-}sistema-cadastro-api
+    build:
+      context: .
+      dockerfile: Sistema.Cadastro.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge

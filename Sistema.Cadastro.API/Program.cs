@@ -9,7 +9,7 @@ try
 
     var app = builder.Build();
     app.UseAppBuildConfiguration(builder.Configuration);
-
+   
     if (!app.Environment.IsProduction())
     {
         app.UseSwaggerConfig();
