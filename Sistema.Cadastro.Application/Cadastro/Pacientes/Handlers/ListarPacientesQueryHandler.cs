@@ -20,7 +20,7 @@ namespace Sistema.Cadastro.Application.Cadastro.Pacientes.Handlers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Handle(ListarPacientesQuery command, CancellationToken cancellationToken)
+        public async Task<IActionResult> Handle(ListarPacientesQuery query, CancellationToken cancellationToken)
         {
             try
             {

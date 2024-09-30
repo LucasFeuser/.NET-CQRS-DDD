@@ -6,17 +6,17 @@ namespace Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common
     public class DataNascimento : ValueObject
     {
         protected DataNascimento() { }
-        private DateTime Data { get; }
+        public DateTime Value { get; }
 
         public DataNascimento(DateTime data)
         {
-            Data = data;
+            Value = data;
             Validar();
         }
 
         public override void Validar()
         {
-            if (!DataValidator.ValidarDataNascimento(Data))
+            if (!DataValidator.ValidarDataNascimento(Value))
                 throw new InvalidValueObjectException("Cpf informado é inválido.");
         }
     }

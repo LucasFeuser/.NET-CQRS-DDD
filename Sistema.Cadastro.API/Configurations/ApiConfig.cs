@@ -1,13 +1,11 @@
-﻿using Sistema.Cadastro.API.Configurations.Culture;
+﻿using Sistema.Cadastro.API.Configurations.HealthCheck;
+using Sistema.Cadastro.API.Configurations.Culture;
 using Sistema.Cadastro.API.Configurations.Swagger;
-using Microsoft.AspNetCore.Authentication;
+using Sistema.Cadastro.API.Configurations.Json;
+using Sistema.Cadastro.CrossCutting.IoC;
 using Microsoft.AspNetCore.Localization;
 using System.Text.Json.Serialization;
-using System.ComponentModel;
-using System.Reflection;
-using Sistema.Cadastro.API.Configurations.HealthCheck;
 using Microsoft.AspNetCore.Mvc;
-using Sistema.Cadastro.API.Configurations.Json;
 
 namespace Sistema.Cadastro.API.Configurations
 {
@@ -17,6 +15,7 @@ namespace Sistema.Cadastro.API.Configurations
         {
             services.AddHealthCheckService(configuration);
             services.SetDefaultCultureToBrazilian();
+            services.AddControllers();
 
             services.Configure<JsonOptions>(options => {
                 options.JsonSerializerOptions.Converters.Add(new JsonCustomConfig());
@@ -24,12 +23,12 @@ namespace Sistema.Cadastro.API.Configurations
             });
             services.Configure<RequestLocalizationOptions>(options => options.DefaultRequestCulture = new RequestCulture("pt-BR"));
 
-            AuthenticationOptions athenticationOptions = new AuthenticationOptions();
-            configuration.GetSection("AuthenticationOptions").Bind(athenticationOptions);
 
             services.AddEndpointsApiExplorer();
+            services.DependencyInjection(configuration, startup);
 
-            services.AddSwaggerService(athenticationOptions);
+            services.AddSwaggerService();
+
 
             return services;
         }

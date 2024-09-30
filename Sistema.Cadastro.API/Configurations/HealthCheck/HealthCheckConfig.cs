@@ -19,7 +19,7 @@ namespace Sistema.Cadastro.API.Configurations.HealthCheck
 
             app.UseHealthChecks("/status");
 
-            app.UseHealthChecks("/health-check", new HealthCheckOptions()
+            app.UseHealthChecks("/hc", new HealthCheckOptions()
             {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse

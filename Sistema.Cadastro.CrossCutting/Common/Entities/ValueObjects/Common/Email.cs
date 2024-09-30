@@ -6,7 +6,7 @@ namespace Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common
     public class Email : ValueObject
     {
         protected Email() { }
-        private string? Value { get; }
+        public string? Value { get; }
 
         public Email(string email)
         {

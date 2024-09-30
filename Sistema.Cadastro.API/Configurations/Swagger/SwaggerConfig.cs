@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Authentication;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json;
+using Microsoft.Extensions.Options;
 
 namespace Sistema.Cadastro.API.Configurations.Swagger
 {
     public static class SwaggerConfig
     {
 
-        public static IServiceCollection AddSwaggerService(this IServiceCollection services, AuthenticationOptions authOptions)
+        public static IServiceCollection AddSwaggerService(this IServiceCollection services)
         {
 
             services.AddApiVersioning(setup =>
@@ -45,9 +45,18 @@ namespace Sistema.Cadastro.API.Configurations.Swagger
                 c.CustomSchemaIds(x => x.FullName);
                 c.OperationFilter<SwaggerDefaultValues>();
 
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                string[] allMyXmlCommentFileNames =
+                {
+                    $"{Assembly.GetExecutingAssembly().GetName().Name}.xml",
+                    "Public.xml"
+                };
+
+                foreach (string fileName in allMyXmlCommentFileNames)
+                {
+                    string xmlFilePath = Path.Combine(AppContext.BaseDirectory, fileName);
+                    if (File.Exists(xmlFilePath))
+                        c.IncludeXmlComments(xmlFilePath, includeControllerXmlComments: true);
+                }
             });
 
             return services;

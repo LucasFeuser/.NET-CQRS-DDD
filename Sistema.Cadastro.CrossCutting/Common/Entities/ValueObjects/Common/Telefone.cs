@@ -6,19 +6,19 @@ namespace Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common
     public class Telefone : ValueObject
     {
         protected Telefone() { }
-        private string? NumTelefone { get; } = string.Empty;
+        public string? Value { get; } = string.Empty;
 
         public Telefone(string telefone)
         {
-            NumTelefone = telefone;
+            Value = telefone;
             Validar();
         }
 
         public override void Validar()
         {
-            if (string.IsNullOrEmpty(NumTelefone)) return;
+            if (string.IsNullOrEmpty(Value)) return;
 
-            if (!TelefoneValidator.ValidarNumeroTelefone(NumTelefone))
+            if (!TelefoneValidator.ValidarNumeroTelefone(Value))
                 throw new InvalidValueObjectException("Telefone informado é inválido.");
         }
     }

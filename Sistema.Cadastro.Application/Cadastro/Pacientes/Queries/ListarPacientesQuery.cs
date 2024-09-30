@@ -6,7 +6,5 @@ namespace Sistema.Cadastro.Application.Cadastro.Pacientes.Queries
     [DataContract]
     public class ListarPacientesQuery : Query
     {
-        protected ListarPacientesQuery()
-        {   }
     }
 }

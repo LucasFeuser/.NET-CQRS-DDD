@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sistema.Cadastro.API.Controllers.Common;
+using Sistema.Cadastro.Application.Cadastro.Pacientes.Queries;
 using Sistema.Cadastro.CrossCutting.Common.Abstractions;
 using System.Net;
 
 namespace Sistema.Cadastro.API.Controllers.Cadastro.Paciente
 {
-    [Route("api/v{version:apiVersion}/pacientes")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [ApiExplorerSettings(GroupName = "v1")]
     public class PacienteController : BaseController
@@ -22,6 +23,7 @@ namespace Sistema.Cadastro.API.Controllers.Cadastro.Paciente
         [Produces("application/json")]
         public async Task<IActionResult> Get()
         {
+            await _mediatorHandler.ExecutarQueryAsync(new ListarPacientesQuery());
             return Ok("Teste");
         }
     }

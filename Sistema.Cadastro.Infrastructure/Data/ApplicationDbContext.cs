@@ -14,7 +14,9 @@ namespace Sistema.Cadastro.Infrastructure.Data
     {
         private readonly IMediatorHandler _mediator;
         public DbSet<Paciente> Pacientes { get; set; }
-        public DbSet<Enderecos> Endrecos { get; set; }
+
+        //TODO - Aplicar após definir enderecos
+        //public DbSet<Enderecos> Endrecos { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IMediatorHandler mediator) : base(options)
         {
