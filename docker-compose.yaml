@@ -1,11 +1,12 @@
-version: "3.8"
 
 services:
+
   redis:
     image: redis
-    command: redis-server --requirepass redisD3v$
+    container_name: redis
+    command: redis-server
     ports:
-      - "8999:6379"
+      - "6379:6379"
     deploy:
       resources:
         limits:
@@ -17,18 +18,19 @@ services:
 
   postgres:
     image: postgres
+    container_name: postgres
     volumes:
       - ./scripts/creates.sql:/docker-entrypoint-initdb.d/creates.sql
     environment:
       POSTGRES_USER: developer
       POSTGRES_PASSWORD: "D3velop$"
     ports:
-      - "9999:5432"
+      - "5432:5432"
     deploy:
       resources:
         limits:
           cpus: '0.50'
-          memory: 512M
+          memory: 1024m
         reservations:
           cpus: '0.25'
-          memory: 256M
+          memory: 512m

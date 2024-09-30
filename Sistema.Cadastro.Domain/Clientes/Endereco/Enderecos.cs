@@ -1,6 +1,7 @@
 ﻿using Sistema.Cadastro.CrossCutting.Common.Entities;
 using Sistema.Cadastro.Domain.Clientes.Endereco.DTOs;
 using Sistema.Cadastro.Domain.Clientes.Endereco.ValueObjects;
+using Sistema.Cadastro.Domain.Clientes.Paciente;
 
 namespace Sistema.Cadastro.Domain.Clientes.Endereco
 {
@@ -9,21 +10,24 @@ namespace Sistema.Cadastro.Domain.Clientes.Endereco
         protected Enderecos()
         { }
 
-        public required Cep Cep;
-        public required Numero Numero;
-        public string Endereco { get; }
-        public string Complemento { get; private set; }
-        public string Bairro { get; private set; }
-        public string Cidade { get; private set; }
-        public string UF { get; private set; }
+        public string Cep { get; }
+        public int Numero { get; }
+        public string Rua { get; }
+        public string Complemento { get; } = string.Empty;
+        public string Bairro { get; }
+        public string Cidade { get; }
+        public string UF { get; }
 
-        public Enderecos(Cep cep, Numero numero, EnderecosDto dto)
+        public virtual Pacientes Paciente { get; set; }
+
+        public Enderecos(Cep cep, Numero numero, string complemento, EnderecoDto dto)
         {
-            Cep = cep;
-            Numero = numero;
-            Endereco = dto.Endereco;
-            Complemento = dto.Complemento;
+            Cep = cep.Value;
+            Numero = numero.Value;
+            Rua = dto.Endereco;
+            Complemento = complemento;
             Bairro = dto.Bairro;
+            Cidade = dto.Cidade;
             UF = dto.UF;
         }
     }

@@ -1,9 +1,6 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
-using Sistema.Cadastro.Domain.Clientes.Paciente;
+﻿using Sistema.Cadastro.Domain.Clientes.Paciente.DTOs;
 using Sistema.Cadastro.CrossCutting.Common.Abstractions;
 using Sistema.Cadastro.Domain.Clientes.Paciente.Repositories;
-using Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common;
-using Sistema.Cadastro.Domain.Clientes.Paciente.DTOs;
 
 namespace Sistema.Cadastro.Infrastructure.Proxy.Pacientes
 {
@@ -20,7 +17,7 @@ namespace Sistema.Cadastro.Infrastructure.Proxy.Pacientes
 
         public IUnitOfWork UnitOfWork => throw new NotImplementedException();
 
-        public async Task CreateAsync(Paciente agregado)
+        public async Task CreateAsync(Domain.Clientes.Paciente.Pacientes agregado)
         {
             await _repository.CreateAsync(agregado);
         }
@@ -30,7 +27,7 @@ namespace Sistema.Cadastro.Infrastructure.Proxy.Pacientes
             _repository.Dispose();
         }
 
-        public async Task<PacienteDto> ObterPacientePorCpf(Cpf cpf)
+        public async Task<PacienteDto> ObterPacientePorCpf(string cpf)
         {
             string redisKey = cpf.ToString()!;
             PacienteDto paciente = null!;
@@ -52,7 +49,7 @@ namespace Sistema.Cadastro.Infrastructure.Proxy.Pacientes
             List<PacienteDto> pacientes = new(0)!;
 
             pacientes = await _cache.GetAsync<List<PacienteDto>>(redisKey);
-            if (pacientes.Any())
+            if (pacientes is not null)
             {
                 return pacientes;
             }
@@ -63,17 +60,17 @@ namespace Sistema.Cadastro.Infrastructure.Proxy.Pacientes
             return pacientes;
         }
 
-        public void Remove(Paciente agregado)
+        public void Remove(Domain.Clientes.Paciente.Pacientes agregado)
         {
             _repository.Remove(agregado);
         }
 
-        public void Update(Paciente agregado)
+        public void Update(Domain.Clientes.Paciente.Pacientes agregado)
         {
             _repository.Update(agregado);
         }
 
-        public async Task<bool> VerificarExistsPaciente(Cpf cpf) =>
+        public async Task<bool> VerificarExistsPaciente(string cpf) =>
             await _repository.VerificarExistsPaciente(cpf);
     }
 }

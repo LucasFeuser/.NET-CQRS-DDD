@@ -1,4 +1,5 @@
-﻿using Sistema.Cadastro.API.Configurations.HealthCheck;
+﻿using Sistema.Cadastro.API.Configurations.Hangfire;
+using Sistema.Cadastro.API.Configurations.HealthCheck;
 using Sistema.Cadastro.API.Middlewares;
 
 namespace Sistema.Cadastro.API.Configurations
@@ -13,6 +14,8 @@ namespace Sistema.Cadastro.API.Configurations
             builder.UseAuthentication();
             builder.UseAuthorization();
             builder.UseMiddleware<ErrorHandlingMiddleware>();
+
+            builder.UseHangFireServices();
 
             return builder;
         }

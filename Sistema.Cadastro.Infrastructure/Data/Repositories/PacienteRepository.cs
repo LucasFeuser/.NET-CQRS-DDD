@@ -1,5 +1,4 @@
-﻿using Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common;
-using Sistema.Cadastro.Domain.Clientes.Paciente.Repositories;
+﻿using Sistema.Cadastro.Domain.Clientes.Paciente.Repositories;
 using Sistema.Cadastro.Domain.Clientes.Paciente.DTOs;
 using Sistema.Cadastro.Infrastructure.Data.Common;
 using Sistema.Cadastro.Domain.Clientes.Paciente;
@@ -8,7 +7,7 @@ using AutoMapper;
 
 namespace Sistema.Cadastro.Infrastructure.Data.Repositories
 {
-    public class PacienteRepository : BaseRepository<Paciente>, IPacienteRepository
+    public class PacienteRepository : BaseRepository<Pacientes>, IPacienteRepository
     {
         private readonly IMapper _map;
 
@@ -17,11 +16,11 @@ namespace Sistema.Cadastro.Infrastructure.Data.Repositories
             _map = map;
         }
 
-        public async Task<PacienteDto> ObterPacientePorCpf(Cpf cpf)
+        public async Task<PacienteDto> ObterPacientePorCpf(string cpf)
         {
             var paciente = await _context.Pacientes
-                .Where(p => p.Cpf == cpf.Value)
-                .SingleOrDefaultAsync();
+                .Where(p => p.Cpf == cpf)
+                .FirstOrDefaultAsync();
 
             return _map.Map<PacienteDto>(paciente);
         }
@@ -33,11 +32,11 @@ namespace Sistema.Cadastro.Infrastructure.Data.Repositories
             return _map.Map<List<PacienteDto>>(pacientes);
         }
 
-        public async Task<bool> VerificarExistsPaciente(Cpf cpf)
+        public async Task<bool> VerificarExistsPaciente(string cpf)
         {
             var paciente = await _context.Pacientes
-                .Where(p => p.Cpf == cpf.Value)
-                .SingleOrDefaultAsync();
+                            .Where(p => p.Cpf == cpf)
+                            .FirstOrDefaultAsync();
 
             return paciente is not null;
         }

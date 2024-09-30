@@ -13,7 +13,7 @@ namespace Sistema.Cadastro.Infrastructure.Data
     public class ApplicationDbContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediator;
-        public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Pacientes> Pacientes { get; set; }
 
         //TODO - Aplicar após definir enderecos
         //public DbSet<Enderecos> Endrecos { get; set; }
@@ -48,7 +48,9 @@ namespace Sistema.Cadastro.Infrastructure.Data
                 {
                     AtualizarDataUltimaAtualizacao(entidadesAlteradas);
 
-                    if (await SaveChangesAsync() > 0)
+                    bool success = await SaveChangesAsync() > 0;
+
+                    if (success)
                     {
                         await _mediator.PublicarEventosAsync(this);
                         return true;
@@ -74,7 +76,7 @@ namespace Sistema.Cadastro.Infrastructure.Data
                 var propertyInfo = entry.Entity.GetType().GetProperty("DataUltimaAtualizacao");
                 if (propertyInfo is not null)
                 {
-                    propertyInfo.SetValue(entry.Entity, DateTime.UtcNow);
+                    propertyInfo.SetValue(entry.Entity, DateTime.Now);
                 }
             }
         }

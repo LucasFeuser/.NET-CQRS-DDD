@@ -6,6 +6,7 @@ using Sistema.Cadastro.CrossCutting.IoC;
 using Microsoft.AspNetCore.Localization;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
+using Sistema.Cadastro.API.Configurations.Hangfire;
 
 namespace Sistema.Cadastro.API.Configurations
 {
@@ -28,7 +29,7 @@ namespace Sistema.Cadastro.API.Configurations
             services.DependencyInjection(configuration, startup);
 
             services.AddSwaggerService();
-
+            services.AddHangfireService(configuration);
 
             return services;
         }

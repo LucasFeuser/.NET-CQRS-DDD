@@ -5,21 +5,23 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace Sistema.Cadastro.Infrastructure.Cache
 {
     public class RedisCache : IRedisCache
     {
         private readonly IDistributedCache _distributedCache;
-
         private readonly ILogger<RedisCache> _logger;
-
         private DistributedCacheEntryOptions _options;
-        public RedisCache(IDistributedCache distributedCache, ILogger<RedisCache> logger, IOptions<CacheOptions> options)
+        private readonly string Section = "Redis";
+
+
+        public RedisCache(IDistributedCache distributedCache, ILogger<RedisCache> logger, IConfiguration configuration)
         {
             _options = new DistributedCacheEntryOptions
             {
-                SlidingExpiration = TimeSpan.FromMinutes(options.Value.DefaultExpirationTime)
+                SlidingExpiration = TimeSpan.FromMinutes(configuration.GetSection(Section).Get<CacheOptions>().DefaultExpirationTime)
             };
 
             _distributedCache = distributedCache;

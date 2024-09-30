@@ -1,10 +1,12 @@
-﻿using Sistema.Cadastro.Application.Cadastro.Pacientes.Mapping;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Sistema.Cadastro.Application.Cadastro.Pacientes.Mapping;
 using Sistema.Cadastro.Application.Common;
+using Sistema.Cadastro.Application.Services;
+using Sistema.Cadastro.Application.Services.Interfaces;
 using Sistema.Cadastro.Infrastructure;
 using System.Reflection;
-using FluentValidation;
-using MediatR;
 
 namespace Sistema.Cadastro.Application
 {
@@ -17,6 +19,7 @@ namespace Sistema.Cadastro.Application
             .ForEach(result => services.AddScoped(result.InterfaceType, result.ValidatorType));
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FailFastRequestBehavior<,>));
+            services.AddTransient<INotificacaoService, NotificacaoService>();
 
             services.AddAutoMapper(typeof(PacienteProfile));
 
