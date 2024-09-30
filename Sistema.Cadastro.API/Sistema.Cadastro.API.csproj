@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Sistema.Cadastro.CrossCutting.IoC\Sistema.Cadastro.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\Sistema.Cadastro.CrossCutting\Sistema.Cadastro.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>

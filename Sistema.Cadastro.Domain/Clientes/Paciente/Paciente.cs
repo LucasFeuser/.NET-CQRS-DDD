@@ -15,17 +15,17 @@ namespace Sistema.Cadastro.Domain.Clientes.Paciente
         /// <summary>
         /// Documento pessoa fisica paciente
         /// </summary>
-        public Cpf Cpf { get; private set; }
+        public string Cpf { get; private set; }
 
         /// <summary>
         /// Nome completo do paciente
         /// </summary>
-        public NomeCompleto NomeCompleto { get; private set; }
+        public string NomeCompleto { get; private set; }
 
         /// <summary>
         /// Data de nascimento do paciente
         /// </summary>
-        public DataNascimento DataNascimento { get; private set; }
+        public DateTime DataNascimento { get; private set; }
 
         /// <summary>
         /// Genero do paciente
@@ -35,12 +35,12 @@ namespace Sistema.Cadastro.Domain.Clientes.Paciente
         /// <summary>
         /// Telefone do paciente
         /// </summary>
-        public Telefone Telefone { get; private set; }
+        public string Telefone { get; private set; }
 
         /// <summary>
         /// Email do paciente
         /// </summary>
-        public Email Email { get; private set; }
+        public string Email { get; private set; }
 
         /// <summary>
         /// Tipo plano de saúde do paciente
@@ -59,32 +59,32 @@ namespace Sistema.Cadastro.Domain.Clientes.Paciente
 
         public Paciente(Cpf cpf, NomeCompleto nomeCompleto, DataNascimento dataNascimento, PacienteDto dto)
         {
-            Cpf = cpf;
-            NomeCompleto = nomeCompleto;
-            DataNascimento = dataNascimento;
+            Cpf = cpf.Value;
+            NomeCompleto = nomeCompleto.Value;
+            DataNascimento = dataNascimento.Value;
             Sexo = dto.Sexo;
-            Telefone = new Telefone(dto.Telefone);
-            Email = new Email(dto.Email);
+            Telefone = new Telefone(dto.Telefone).Value;
+            Email = new Email(dto.Email).Value;
             PlanoSaude = dto.PlanoSaude;
             NumeroCarterinha = dto.NumeroCarterinha;
             ReceberNotificacoesWhats = dto.ReceberNotificacoesWhats;
 
             ValidarPlanoSaude();
-            AdicionarEvento(new PacienteCadastradoEvent(Cpf, NomeCompleto, DataNascimento, dto));
+            AdicionarEvento(new PacienteCadastradoEvent(cpf, nomeCompleto, dataNascimento, dto));
         }
 
         public Paciente AlterarDadosCliente(Cpf cpf, NomeCompleto nomeCompleto, DataNascimento dataNascimento, AlteracaoDadosPacienteDto dto)
         {
-            NomeCompleto = nomeCompleto;
-            DataNascimento = dataNascimento;
-            Telefone = new Telefone(dto.Telefone);
-            Email = new Email(dto.Email);
+            NomeCompleto = nomeCompleto.Value;
+            DataNascimento = dataNascimento.Value;
+            Telefone = new Telefone(dto.Telefone).Value;
+            Email = new Email(dto.Email).Value;
             PlanoSaude = dto.PlanoSaude;
             NumeroCarterinha = dto.NumeroCarterinha;
             ReceberNotificacoesWhats = dto.ReceberNotificacoesWhats;
 
             ValidarPlanoSaude();
-            AdicionarEvento(new DadosPacienteAlteradoEvent(Cpf, NomeCompleto, DataNascimento, dto));
+            AdicionarEvento(new DadosPacienteAlteradoEvent(cpf, nomeCompleto, dataNascimento, dto));
 
             return this;
         }

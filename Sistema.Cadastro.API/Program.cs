@@ -1,22 +1,25 @@
-var builder = WebApplication.CreateBuilder(args);
+using Sistema.Cadastro.API.Configurations;
+using Sistema.Cadastro.API.Configurations.Swagger;
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
-var app = builder.Build();
-
-if (!app.Environment.IsProduction())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.UseApiServices(builder.Configuration, typeof(Program));
+
+    var app = builder.Build();
+    app.UseAppBuildConfiguration(builder.Configuration);
+
+    if (!app.Environment.IsProduction())
+    {
+        app.UseSwaggerConfig();
+    }
+
+    app.MapControllers();
+    app.Run();
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+catch (Exception ex)
+{
+    //FATAL ERROR
+    throw;
+}

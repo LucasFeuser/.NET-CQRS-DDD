@@ -6,23 +6,23 @@ namespace Sistema.Cadastro.CrossCutting.Common.Entities.ValueObjects.Common
     public class NomeCompleto : ValueObject
     {
         protected NomeCompleto() { }
-        private string? Nome { get; }
+        public string? Value { get; }
 
         public NomeCompleto(string nome)
         {
-            Nome = nome;
+            Value = nome;
             Validar();
         }
 
         public override void Validar()
         {
-            if (string.IsNullOrWhiteSpace(Nome))
+            if (string.IsNullOrWhiteSpace(Value))
                 throw new InvalidValueObjectException("O nome informado é inválido.");
 
-            if (Nome.Split(" ").Length < 3)
+            if (Value.Split(" ").Length < 3)
                 throw new InvalidValueObjectException("O nome informado é inválido.");
 
-            if (Nome.PossuiNumero())
+            if (Value.PossuiNumero())
                 throw new InvalidValueObjectException("O nome informado é inválido.");
         }
 

@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Sistema.Cadastro.Application;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Sistema.Cadastro.Infrastructure;
+using Sistema.Cadastro.Application;
 
 namespace Sistema.Cadastro.CrossCutting.IoC
 {
@@ -15,9 +15,9 @@ namespace Sistema.Cadastro.CrossCutting.IoC
                 startup
            );
 
-            services.ResolveApplication();
-
             services.ResolveInfraestructure(configuration);
+
+            services.ResolveApplication(startup);
         }
 
     }
